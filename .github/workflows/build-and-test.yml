@@ -14,6 +14,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
@@ -22,6 +28,7 @@ jobs:
         tags: random-quote-generator:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
+        builder: docker-container
         build-args: |
           COMMIT_SHA=${{ github.sha }}
           CACHEBUST=${{ github.sha }}
