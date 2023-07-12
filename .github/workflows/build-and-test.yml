@@ -14,12 +14,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build Docker image
+    - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
-        push: false
-        tags: random-quote-generator
+        push: true
+        tags: random-quote-generator:latest
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache
+        build-args: |
+          COMMIT_SHA=${{ github.sha }}
+          CACHEBUST=${{ github.sha }}
 
     - name: Run tests
-      run: docker run random-quote-generator
+      run: docker run random-quote-generator:latest
