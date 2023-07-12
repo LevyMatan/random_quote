@@ -28,7 +28,7 @@ jobs:
         tags: random-quote-generator:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
-        builder: docker-container
+        builder: docker
         build-args: |
           COMMIT_SHA=${{ github.sha }}
           CACHEBUST=${{ github.sha }}
