@@ -1,0 +1,15 @@
+{
+  "name": "random-quote-generator",
+  "version": "1.0.0",
+  "description": "A simple webapp that displays a random quote",
+  "main": "script.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "jasmine": "^3.8.0"
+  }
+}
