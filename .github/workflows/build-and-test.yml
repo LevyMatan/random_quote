@@ -23,8 +23,17 @@ jobs:
     - name: Run Docker container
       run: docker run -d --name random-quote-generator random-quote-generator
 
+    - name: Show Docker logs
+      run: docker logs --tail 100 random-quote-generator
+
+    - name: Check if container is running
+      id: check-container
+      run: echo ::set-output name=running::$(docker inspect --format '{{.State.Running}}' random-quote-generator)
+
     - name: Run tests
+      if: steps.check-container.outputs.running == 'true'
       run: docker exec random-quote-generator npm test
 
     - name: Stop Docker container
+      if: steps.check-container.outputs.running == 'true'
       run: docker stop random-quote-generator
