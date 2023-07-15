@@ -28,7 +28,7 @@ jobs:
 
     - name: Check if container is running
       id: check-container
-      run: echo ::set-output name=running::$(docker inspect --format '{{.State.Running}}' random-quote-generator)
+      run: echo "running=$(docker inspect --format '{{.State.Running}}' random-quote-generator)" >> $GITHUB_ENV
 
     - name: Run tests
       if: steps.check-container.outputs.running == 'true'
