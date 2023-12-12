@@ -7,7 +7,7 @@
     "test": "jasmine"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "jasmine": "^3.8.0"
